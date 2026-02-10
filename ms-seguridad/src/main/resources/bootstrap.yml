@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    config:
+      uri: http://192.168.8.76:8085/
+      label: master
+      username: root
+      password: s3cr3t
+  application:
+    name: ms-seguridad
+  profiles:
+    active: local
+logback:
+  elk:
+    destination: 192.168.8.76:5000

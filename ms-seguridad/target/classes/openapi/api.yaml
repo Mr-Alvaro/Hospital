@@ -1,0 +1,2058 @@
+openapi: 3.0.3
+info:
+  title: ms-seguridad
+  description: Administrar los datos de seguridad.
+  version: 1.3.0
+externalDocs:
+  description: Más información
+  url: https://www.hospitalcayetano.gob.pe/PortalWeb/
+servers:
+  - url: https://localhost:8080/ms-seguridad/api/v1
+    description: Ambiente local.
+  - url: https://192.168.8.71:8080/ms-seguridad/api/v1
+    description: Ambiente de desarrollo.
+paths:
+  /seguridades/login:
+    post:
+      tags:
+        - Seguridad
+      summary: Registrar el login del usuario.
+      description: |
+        Este método permitirá registrar el login del usuario. Esto trabaja con la base de datos de SEGU.
+      operationId: login
+      requestBody:
+        required: true
+        description: Request requerido para el registro del login.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '401':
+          description: 'Acceso no autorizado'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse401'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+  /seguridades/decodeToken:
+    get:
+      tags:
+        - Seguridad
+      summary: Listar datos del usuario.
+      description: |
+        Este método permitirá Listar los datos del usuario.Esto trabaja con la base de datos de SEGU.
+      operationId: listarDatosUsuario
+      parameters:
+        - name: token
+          in: query
+          description: "Token del usuario <br> formato: alfanumerico"
+          required: false
+          schema:
+            type: string
+            example: '123aBc...'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListarDatosUsuarioResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+  /seguridades/refreshToken:
+    post:
+      tags:
+        - Seguridad
+      summary: Refrescar el token de sesion.
+      description: |
+        Este método permitirá renovar el token de sesión.Esto trabaja con la base de datos de SEGU.
+      operationId: refrescarToken
+      requestBody:
+        required: true
+        description: Request requerido para el registro del login.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenRequest'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefreshTokenResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+  /seguridades/usuario:
+    post:
+      tags:
+        - Usuario
+      summary: Registrar el usuario.
+      description: |
+        Este método permitirá registrar el usuario. Esto trabaja con la base de datos de SEGU.
+      operationId: registrarUsuario
+      requestBody:
+        required: true
+        description: Request requerido para el registro del usuario.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioRequest'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '401':
+          description: 'Acceso no autorizado'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse401'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+    put:
+      tags:
+        - Usuario
+      summary: Actualizar usuario.
+      description: |
+        Este método permitirá actualizar usuario. Esto trabaja con la base de datos de SEGU.
+      operationId: actualizarUsuario
+      requestBody:
+        required: true
+        description: Request requerido para la actualización del usuario.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioRequest'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+    get:
+      tags:
+        - Usuario
+      summary: Listar usuarios.
+      description: |
+        Este método permitirá listar usuarios. Esto trabaja con la base de datos de SEGU.
+      operationId: listarUsuarios
+      parameters:
+        - name: nombreUsuario
+          in: query
+          description: "Nombre de usuario"
+          required: false
+          schema:
+            type: string
+            example: 'LUIS.DELFOR'
+        - name: estado
+          in: query
+          description: "Estado de usuario"
+          required: false
+          schema:
+            type: string
+            example: '1'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioListarResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '401':
+          description: 'Acceso no autorizado'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse401'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+  /seguridades/usuario/obtenerDatos:
+    post:
+      tags:
+        - Usuario
+      summary: Obtener datos de usuario.
+      description: |
+        Este método permitirá datos del usuario. Esto trabaja con la base de datos de SEGU.
+      operationId: obtenerDatosUsuario
+      requestBody:
+        required: true
+        description: Request requerido para la busqueda del usuario.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioRequest'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+  /seguridades/usuario/{usuarioId}:
+    delete:
+      tags:
+        - Usuario
+      summary: Eliminar usuario. Esto trabaja con la base de datos de SEGU
+      description: |
+        Este método permitirá eliminar usuario. Esto trabaja con la base de datos de SEGU.
+      operationId: eliminarUsuarioPorId
+      parameters:
+        - name: usuarioId
+          in: path
+          description: "Identificador de Usuario"
+          required: true
+          schema:
+            type: string
+            example: 1
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioDeleteResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+  /seguridades/usuario/limpiarClave:
+    put:
+      tags:
+        - Usuario
+      summary: Limpiar clave del usuario.
+      description: |
+        Este método permitirá limpiar la clave del usuario. Esto trabaja con la base de datos de SEGU.
+      operationId: limpiarClavePorUsuarioId
+      parameters:
+        - name: usuarioId
+          in: query
+          description: "Identificador de usuario"
+          required: true
+          schema:
+            type: string
+            example: '1'
+        - name: codEmple
+          in: query
+          description: "Identificador de personal"
+          required: true
+          schema:
+            type: string
+            example: '1'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioLimpiarClaveResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+  /seguridades/usuario/cambiarClave/{usuarioId}:
+    put:
+      tags:
+        - Usuario
+      summary: Cambiar clave del usuario.
+      description: |
+        Este método permitirá Cambiar la clave del usuario. Esto trabaja con la base de datos de SEGU.
+      operationId: cambiarClavePorUsuarioId
+      parameters:
+        - name: usuarioId
+          in: path
+          description: "Identificador de Usuario"
+          required: true
+          schema:
+            type: string
+            example: 1
+      requestBody:
+        required: true
+        description: Request requerido para la cambiar la clave del usuario.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioRequest'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioCambiarClaveResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+  /seguridades/menu:
+    post:
+      tags:
+        - Menu
+      summary: Registrar menu.
+      description: |
+        Este método permitirá registrar menu. Esto trabaja con la base de datos de SEGU.
+      operationId: registrarMenu
+      requestBody:
+        required: true
+        description: Request requerido para el registro del menu.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuRequest'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '401':
+          description: 'Acceso no autorizado'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse401'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+    get:
+      tags:
+        - Menu
+      summary: Listar menus.
+      description: |
+        Este método permitirá listar menu. Esto trabaja con la base de datos de SEGU.
+      operationId: listarMenu
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuListarResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '401':
+          description: 'Acceso no autorizado'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse401'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+  /seguridades/menu/listarPorPerfil/{perfilId}:
+    get:
+      tags:
+        - Menu
+      summary: Listar menus por perfil.
+      description: |
+        Este método permitirá listar menu por perfil. Esto trabaja con la base de datos de SEGU.
+      operationId: listarMenuPerfil
+      parameters:
+        - name: perfilId
+          in: path
+          description: "Identificador de perfil"
+          required: true
+          schema:
+            type: string
+            example: '000001'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuListarResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '401':
+          description: 'Acceso no autorizado'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse401'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+  /seguridades/menu/asociar:
+    post:
+      tags:
+        - Menu
+      summary: Asociar los menus con el perfil.
+      description: |
+        Este método permitirá asociar los menus con el perfil. Esto trabaja con la base de datos de SEGU.
+      operationId: asociarMenuPerfil
+      requestBody:
+        required: true
+        description: Request requerido para asociar los menus con el perfil.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MenuAsociarPerfilRequest'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MenuPerfilResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '401':
+          description: 'Acceso no autorizado'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse401'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+  /seguridades/perfil:
+    post:
+      tags:
+        - Perfil
+      summary: Registrar perfil.
+      description: |
+        Este método permitirá registrar perfil. Esto trabaja con la base de datos de SEGU.
+      operationId: registrarPerfil
+      requestBody:
+        required: true
+        description: Request requerido para registrar el perfil.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PerfilRequest'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PerfilDataResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '401':
+          description: 'Acceso no autorizado'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse401'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+    get:
+      tags:
+        - Perfil
+      summary: Listar perfiles.
+      description: |
+        Este método permitirá listar perfiles. Esto trabaja con la base de datos de SEGU.
+      operationId: listarPerfiles
+      parameters:
+        - name: nombre
+          in: query
+          description: "Nombre del perfil"
+          required: true
+          schema:
+            type: string
+            example: 'ADMIN'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PerfilListarResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '401':
+          description: 'Acceso no autorizado'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse401'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+  /seguridades/perfil/{perfilId}:
+    delete:
+      tags:
+        - Perfil
+      summary: Eliminar perfil. Esto trabaja con la base de datos de SEGU
+      description: |
+        Este método permitirá eliminar perfil. Esto trabaja con la base de datos de SEGU.
+      operationId: eliminarPerfilPorId
+      parameters:
+        - name: perfilId
+          in: path
+          description: "Identificador de perfil"
+          required: true
+          schema:
+            type: string
+            example: '1'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PerfilDeleteResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+    put:
+      tags:
+        - Perfil
+      summary: Actualizar el perfil.
+      description: |
+        Este método permitirá actualizar el perfil. Esto trabaja con la base de datos de SEGU.
+      operationId: actualizarPerfilPorId
+      parameters:
+        - name: perfilId
+          in: path
+          description: "Identificador de perfil"
+          required: true
+          schema:
+            type: string
+            example: '1'
+      requestBody:
+        required: true
+        description: Request requerido para registrar el perfil.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PerfilRequest'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PerfilDataResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+  /seguridades/loginMobile:
+    post:
+      tags:
+        - Seguridad
+      summary: Registrar el login del usuario.
+      description: |
+        Este método permitirá registrar el login del usuario. Esto trabaja con la base de datos de SEGU.
+      operationId: loginMobile
+      requestBody:
+        required: true
+        description: Request requerido para el registro del login.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ValidarLoginRequest'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidarLoginResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '401':
+          description: 'Acceso no autorizado'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse401'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+  /seguridades/decodeTokenMobile:
+    get:
+      tags:
+        - Seguridad
+      summary: Listar datos del usuario.
+      description: |
+        Este método permitirá Listar los datos del usuario.Esto trabaja con la base de datos de SEGU.
+      operationId: listarDatosUsuarioMobile
+      parameters:
+        - name: token
+          in: query
+          description: "Token del usuario <br> formato: alfanumerico"
+          required: false
+          schema:
+            type: string
+            example: '123aBc...'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListarDatosUsuarioMobileResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+  /seguridades/refreshTokenMobile:
+    post:
+      tags:
+        - Seguridad
+      summary: Refrescar el token de sesion.
+      description: |
+        Este método permitirá renovar el token de sesión.Esto trabaja con la base de datos de SEGU.
+      operationId: refrescarTokenMobile
+      requestBody:
+        required: true
+        description: Request requerido para el registro del login.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenMobileRequest'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefreshTokenMobileResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+  /seguridades/validarPermiso:
+    get:
+      tags:
+        - Seguridad
+      summary: Validar Permiso a perfil usuario.
+      description: |
+        Este método permitirá validar Permiso a perfil usuario.Esto trabaja con la base de datos de SEGU.
+      operationId: validarPermisoUsuario
+      parameters:
+        - name: token
+          in: query
+          description: "token <br> formato: alfanumerico"
+          required: true
+          schema:
+            type: string
+            example: 'akhjebvkajebrivaerv'
+        - name: contexPath
+          in: query
+          description: "Contexto del path <br> formato: alfanumerico"
+          required: true
+          schema:
+            type: string
+            example: 'ms-catalogo'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidarPermisoUsuarioResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '401':
+          description: 'Acceso no autorizado'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse401'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+  /seguridades/verificacionMfa:
+    post:
+      tags:
+        - Seguridad
+      summary: Registrar el login del usuario.
+      description: |
+        Este método permitirá registrar el login del usuario. Esto trabaja con la base de datos de SEGU.
+      operationId: verificacionMfa
+      requestBody:
+        required: true
+        description: Request requerido para el registro del login.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerificacionMfaRequest'
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerificacionMfaResponse'
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '401':
+          description: 'Acceso no autorizado'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse401'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+  /seguridades/refresh:
+    post:
+      tags:
+        - Seguridad
+      summary: Registrar el login del usuario.
+      description: |
+        Este método permitirá registrar el login del usuario. Esto trabaja con la base de datos de SEGU.
+      operationId: refreshConfig
+      responses:
+        '200':
+          description: Operación exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+        '400':
+          description: Datos no válidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse400'
+        '401':
+          description: 'Acceso no autorizado'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse401'
+        '404':
+          description: Recurso inválido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse404'
+        '500':
+          description: Error inesperado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse500'
+components:
+  schemas:
+    ListarDatosUsuarioResponse:
+      type: object
+      description: "Obtener datos del usuario"
+      properties:
+        data:
+          $ref: '#/components/schemas/ListarDatosUsuarioDataResponse'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    ListarDatosUsuarioDataResponse:
+      type: object
+      description: "Obtener los datos del paciente"
+      properties:
+        codUsuario:
+          type: string
+          description: "descripción: codigo de usuario <br> formato: número en cadena"
+          example: '123aBc...'
+        codPersonal:
+          type: string
+          description: "descripción: codigo de personal <br> formato: número en cadena"
+          example: '123aBc...'
+        nroDocumento:
+          type: string
+          description: "descripción: número de doc <br> formato: número en cadena"
+          example: '12'
+        priNombre:
+          type: string
+          description: "descripción: primer nombre <br> formato: DNI, pasaporte o carnet de extranjería"
+          example: 'ELMER'
+        segNombre:
+          type: string
+          description: "descripción: segundo nombre <br> formato: cadena"
+          example: 'ALEXANDER'
+        apePaterno:
+          type: string
+          description: "descripción: apellido paterno <br> formato: cadena"
+          example: 'OCHOA'
+        apeMaterno:
+          type: string
+          description: "descripción: apellido materno <br> formato: cadena"
+          example: 'LA CRUZ'
+        sub:
+          type: string
+          description: "descripción: usuario <br> formato: cadena"
+          example: 'ELMER.OCHOAL'
+        fechaNac:
+          type: integer
+          description: "descripción: fecha de nacimiento <br> formato: dd-MM-yyyy"
+          example: '03-06-2024'
+        nroColeg:
+          type: string
+          description: "descripción: número de colega <br> formato: número en cadena"
+          example: '12'
+        roles:
+          type: array
+          items:
+            $ref: '#/components/schemas/ListarRolesDataResponse'
+        correo:
+          type: string
+          description: "descripción: fecha de expiración del token <br> formato: dd-MM-yyyy"
+          example: '03-06-2024'
+        exp:
+          type: integer
+          description: "descripción: fecha de expiración del token <br> formato: dd-MM-yyyy"
+          example: '03-06-2024'
+        iat:
+          type: integer
+          description: "descripción: fecha de la generación del token <br> formato: dd-MM-yyyy"
+          example: '03-06-2024'
+        jti:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+    ListarRolesDataResponse:
+      type: object
+      properties:
+        codigo:
+          type: string
+          description: "descripción: código del rol <br> formato: cadena"
+          example: "000001"
+        descripcion:
+          type: string
+          description: "descripción: descripción del rol <br> formato: numérico"
+          example: "sgd"
+        permisos:
+          type: array
+          items:
+            type: string
+    LoginRequest:
+      type: object
+      description: "request para el registro del login"
+      properties:
+        usuario:
+          type: string
+          description: "descripción: usuario <br> formato: cadena"
+          example: 'ELMR.CGS'
+        password:
+          type: string
+          description: "descripción: contraseña <br> formato: cadena"
+          example: '*****'
+    LoginResponse:
+      type: object
+      description: "Respuesta del login"
+      properties:
+        data:
+          $ref: '#/components/schemas/LoginDataResponse'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    LoginDataResponse:
+      type: object
+      description: "Datos de la respuesta del login"
+      properties:
+        token:
+          type: string
+          description: "descripción: token de usuario <br> formato: número en cadena"
+          example: '123aBc'
+        refreshToken:
+          type: string
+          description: "descripción: token de usuario <br> formato: cadena"
+          example: '123aBc...'
+        correo:
+          type: string
+          description: "descripción: token de usuario <br> formato: cadena"
+          example: '123aBc...'
+        exp:
+          type: integer
+          description: "descripción: fecha de expiración del token <br> formato: dd-MM-yyyy"
+          example: '03-06-2024'
+        iat:
+          type: integer
+          description: "descripción: fecha de la generación del token <br> formato: dd-MM-yyyy"
+          example: '03-06-2024'
+        jti:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        keyMs:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        verMfaHabilitado:
+          type: boolean
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "false"
+    RefreshTokenRequest:
+      type: object
+      description: "request para el refrescar token"
+      properties:
+        token:
+          type: string
+          description: "descripción: token para refrescar sesión <br> formato: número en cadena"
+          example: '123aBc...'
+    RefreshTokenResponse:
+      type: object
+      description: "Respuesta del refrescar token de sesión"
+      properties:
+        data:
+          $ref: '#/components/schemas/RefreshTokenDataResponse'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    RefreshTokenDataResponse:
+      type: object
+      description: "Datos de respuesta del registro del login"
+      properties:
+        token:
+          type: string
+          description: "descripción: token de usuario <br> formato: número en cadena"
+          example: '123aBc...'
+        refreshToken:
+          type: string
+          description: "descripción: token de refresco del token de usuario <br> formato: número en cadena"
+          example: '123aBc...'
+        jti:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+    UsuarioResponse:
+      type: object
+      description: "Respuesta del usuario"
+      properties:
+        data:
+          $ref: '#/components/schemas/UsuarioDataResponse'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    UsuarioListarResponse:
+      type: object
+      description: "Respuesta del usuario"
+      properties:
+        data:
+          $ref: '#/components/schemas/UsuarioListarDataResponse'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    UsuarioDeleteResponse:
+      type: object
+      description: "Respuesta del usuario"
+      properties:
+        data:
+          $ref: '#/components/schemas/UsuarioDeleteDataResponse'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    UsuarioDeleteDataResponse:
+      type: object
+      description: "Datos de envio del usuario"
+      properties:
+        indicador:
+          type: boolean
+          description: "descripción: indicador de eliminación <br> formato: cadena"
+          example: true
+    UsuarioCambiarClaveResponse:
+      type: object
+      description: "Respuesta del usuario"
+      properties:
+        data:
+          $ref: '#/components/schemas/UsuarioCambiarClaveDataResponse'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    UsuarioCambiarClaveDataResponse:
+      type: object
+      description: "Datos de envio del usuario"
+      properties:
+        indicador:
+          type: boolean
+          description: "descripción: indicador de eliminación"
+          example: true
+    UsuarioLimpiarClaveResponse:
+      type: object
+      description: "Respuesta del usuario"
+      properties:
+        data:
+          $ref: '#/components/schemas/UsuarioLimpiarClaveDataResponse'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    UsuarioLimpiarClaveDataResponse:
+      type: object
+      description: "Datos de envio del usuario"
+      properties:
+        indicador:
+          type: boolean
+          description: "descripción: indicador de eliminación"
+          example: true
+    UsuarioListarDataResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/UsuarioDataResponse'
+    UsuarioDataResponse:
+      type: object
+      description: "Datos de envio del usuario"
+      properties:
+        codigo:
+          type: string
+          description: "descripción: codigo <br> formato: número en cadena"
+          example: '123456'
+        usuario:
+          type: string
+          description: "descripción: usuario <br> formato: cadena"
+          example: 'raul.meza'
+        clave:
+          type: string
+          description: "descripción: clave <br> formato: cadena"
+          example: 'raul.meza'
+        numeroDocumento:
+          type: string
+          description: "descripción: usuario <br> formato: número en cadena"
+          example: '78945456'
+        perfil:
+          $ref: '#/components/schemas/Perfil'
+        swActivo:
+          type: string
+          description: "descripción: swActivo <br> formato: número en cadena"
+          example: '1'
+        personal:
+          $ref: '#/components/schemas/PersonalData'
+        flag:
+          type: number
+          description: "descripción: flag <br> formato: numerico"
+          example: '1'
+        indicador:
+          type: number
+          description: "descripción: indicador <br> formato: numérico"
+          example: '1'
+        auditObject:
+          $ref: '#/components/schemas/AuditObject'
+        swClaveE:
+          type: boolean
+          description: "descripción: sw clave encriptada <br> formato: cadena"
+          example: 'true'
+        estado:
+          type: string
+          description: "descripción: estado <br> formato: número en cadena"
+          example: '1'
+        situacion:
+          $ref: '#/components/schemas/Situacion'
+    UsuarioRequest:
+      type: object
+      description: "Datos de envio del usuario"
+      properties:
+        codigo:
+          type: string
+          description: "descripción: codigo <br> formato: número en cadena"
+          example: '123456'
+        usuario:
+          type: string
+          description: "descripción: usuario <br> formato: cadena"
+          example: 'raul.meza'
+        clave:
+          type: string
+          description: "descripción: clave <br> formato: cadena"
+          example: 'raul.meza'
+        numeroDocumento:
+          type: string
+          description: "descripción: usuario <br> formato: número en cadena"
+          example: '78945456'
+        perfil:
+          $ref: '#/components/schemas/Perfil'
+        swActivo:
+          type: string
+          description: "descripción: swActivo <br> formato: número en cadena"
+          example: '1'
+        personal:
+          $ref: '#/components/schemas/PersonalData'
+        flag:
+          type: number
+          description: "descripción: flag <br> formato: numerico"
+          example: '1'
+        indicador:
+          type: number
+          description: "descripción: indicador <br> formato: numerico"
+          example: '1'
+        auditObject:
+          $ref: '#/components/schemas/AuditObject'
+        swClaveE:
+          type: boolean
+          description: "descripción: sw clave encriptada <br> formato: número en cadena"
+          example: 'true'
+        estado:
+          type: string
+          description: "descripción: estado <br> formato: número en cadena"
+          example: '1'
+        situacion:
+          $ref: '#/components/schemas/Situacion'
+    Situacion:
+      type: object
+      description: "Datos de situacion"
+      properties:
+        codReg:
+          type: string
+          description: "descripción: codigo registro <br> formato: número en cadena"
+          example: '0123'
+        nombreCorto:
+          type: string
+          description: "descripción: nombre corto <br> formato: cadena"
+          example: '0123'
+    Perfil:
+      type: object
+      description: "Datos de perfil"
+      properties:
+        codReg:
+          type: string
+          description: "descripción: codigo registro <br> formato: número en cadena"
+          example: '0123'
+        nombreCorto:
+          type: string
+          description: "descripción: nombre corto <br> formato: cadena"
+          example: '0123'
+    PerfilDeleteResponse:
+      type: object
+      description: "Respuesta de la eliminación del perfil"
+      properties:
+        data:
+          $ref: '#/components/schemas/PerfilDeleteDataResponse'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    PerfilDeleteDataResponse:
+      type: object
+      description: "Datos de respuesta de la eliminación del perfil"
+      properties:
+        indicador:
+          type: boolean
+          description: "descripción: indicador de eliminación"
+          example: true
+    AuditObject:
+      type: object
+      description: "Datos de la auditoria"
+      properties:
+        usuarioReg:
+          type: string
+          description: "descripción: Usuario de registro <br> formato: número en cadena"
+          example: '0123'
+        fechaReg:
+          type: string
+          description: "descripción: Fecha Registro <br> formato: dd-MM-yyyy"
+          example: '12-05-2024'
+        equipoReg:
+          type: string
+          description: "descripción: Equipo Registro <br> formato: dd-MM-yyyy"
+          example: '12-05-2024'
+        usuarioAct:
+          type: string
+          description: "descripción: Usuario Actualizar <br> formato: número en cadena"
+          example: '0123'
+        fechaAct:
+          type: string
+          description: "descripción: Fecha Actualizar <br> formato: dd-MM-yyyy"
+          example: '12-05-2024'
+        equipoAct:
+          type: string
+          description: "descripción: Equipo actualizar <br> formato: dd-MM-yyyy"
+          example: '12-05-2024'
+        MotivoAct:
+          type: string
+          description: "descripción: Motivo actualizar a <br> formato: cadena"
+          example: 'Libre'
+    PersonalData:
+      type: object
+      description: "Datos del personal"
+      properties:
+        codigoEmple:
+          type: string
+          description: "descripción: codigo empleado <br> formato: número en cadena"
+          example: '1234'
+        codigoPersona:
+          type: string
+          description: "descripción: codigo persona <br> formato: número en cadena"
+          example: '1234'
+        codigo:
+          type: string
+          description: "descripción: codigo <br> formato: número en cadena"
+          example: '1234'
+        primerNombre:
+          type: string
+          description: "descripción: primer nombre <br> formato: cadena"
+          example: 'Pedro'
+        segundoNombre:
+          type: string
+          description: "descripción: segundo nombre <br> formato: cadena"
+          example: 'Pablo'
+        apellidoPaterno:
+          type: string
+          description: "descripción: apellido paterno <br> formato: cadena"
+          example: 'Salas'
+        apellidoMaterno:
+          type: string
+          description: "descripción: apellido materno <br> formato: cadena"
+          example: 'Perez'
+        nombreCompleto:
+          type: string
+          description: "descripción: nombre completo <br> formato: cadena"
+          example: 'Luis Garcia'
+        nroDocumento:
+          type: string
+          description: "descripción: número de documento <br> formato: número en cadena"
+          example: '12345678'
+    MenuRequest:
+      $ref: '#/components/schemas/Menu'
+    Menu:
+      type: object
+      description: "Datos del menu"
+      properties:
+        codigo:
+          type: string
+          description: "descripción: codigo <br> formato: número en cadena"
+          example: '1'
+        descripcion:
+          type: string
+          description: "descripción: descripcion <br> formato: cadena"
+          example: 'Home'
+        link:
+          type: string
+          description: "descripción: link <br> formato: cadena"
+          example: '/url'
+        icon:
+          type: string
+          description: "descripción: icono <br> formato: cadena"
+          example: 'pi pi-save'
+        relacion:
+          type: string
+          description: "descripción: relacion: papa,hijo,nieto, etc <br> formato: cadena"
+          example: '1'
+        orden:
+          type: number
+          description: "descripción: orden <br> formato: número en cadena"
+          example: '1'
+        estado:
+          type: string
+          description: "descripción: estado <br> formato: número en cadena"
+          example: '1234'
+    MenuData:
+      type: object
+      description: "Datos del menu"
+      properties:
+        key:
+          type: string
+          description: "descripción: codigo <br> formato: cadena"
+          example: '1'
+        label:
+          type: string
+          description: "descripción: descripcion <br> formato: cadena"
+          example: 'Home'
+        data:
+          type: string
+          description: "descripción: data <br> formato: cadena"
+          example: 'Home'
+        routerLink:
+          type: array
+          items:
+            type: string
+          description: "descripción: link <br> formato: cadena"
+        icon:
+          type: string
+          description: "descripción: icono <br> formato: cadena"
+          example: 'pi pi-save'
+        relacion:
+          type: string
+          description: "descripción: relacion: papa,hijo,nieto, etc <br> formato: número en cadena"
+          example: '1'
+        orden:
+          type: number
+          description: "descripción: orden <br> formato: numérico"
+          example: '1'
+        estado:
+          type: string
+          description: "descripción: estado <br> formato: número en cadena"
+          example: '1234'
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/MenuData'
+    MenuPerfilResponse:
+      type: object
+      description: "Respuesta de la asociación de los menus con el perfil"
+      properties:
+        data:
+          type: object
+          description: "Datos del menu"
+          properties:
+            msg:
+              type: string
+              description: "descripción: codigo <br> formato: número en cadena"
+              example: '1'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    MenuResponse:
+      type: object
+      description: "Respuesta del menu"
+      properties:
+        data:
+          $ref: '#/components/schemas/MenuDataResponse'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    MenuDataResponse:
+      $ref: '#/components/schemas/Menu'
+    MenuListarResponse:
+      type: object
+      description: "Respuesta del menu"
+      properties:
+        data:
+          $ref: '#/components/schemas/MenuListarDataResponse'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    MenuListarDataResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/MenuData'
+    MenuAsociarPerfilRequest:
+      $ref: '#/components/schemas/MenuPerfilRequest'
+    MenuPerfilRequest:
+      type: object
+      description: "Datos de los menus para asociar con el perfil"
+      properties:
+        codigoPerfil:
+          type: string
+          description: "descripción: codigo del perfil <br> formato: número en cadena"
+          example: '000001'
+        idMenus:
+          type: array
+          items:
+            type: string
+    PerfilListarResponse:
+      type: object
+      description: "Respuesta del perfil"
+      properties:
+        data:
+          $ref: '#/components/schemas/PerfilListarDataResponse'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    PerfilListarDataResponse:
+      type: array
+      items:
+        $ref: '#/components/schemas/PerfilData'
+    PerfilData:
+      type: object
+      description: "Datos del perfil"
+      properties:
+        codigo:
+          type: string
+          description: "descripción: codigo <br> formato: número en cadena"
+          example: '1'
+        descripcionCorta:
+          type: string
+          description: "descripción: descripcion corta<br> formato: cadena"
+          example: 'Home'
+        descripcionLarga:
+          type: string
+          description: "descripción: descripcion larga<br> formato: cadena"
+          example: 'Home'
+        valor1:
+          type: string
+          description: "descripción: valor 1 <br> formato: número en cadena"
+          example: '1'
+        valor2:
+          type: string
+          description: "descripción: valor 2 <br> formato: número en cadena"
+          example: '1'
+        orden:
+          type: number
+          description: "descripción: orden <br> formato: número en cadena"
+          example: '1'
+        estado:
+          type: string
+          description: "descripción: estado <br> formato: número en cadena"
+    PerfilRequest:
+      type: object
+      description: "Datos del perfil"
+      properties:
+        codigo:
+          type: string
+          description: "descripción: codigo <br> formato: número en cadena"
+          example: '1'
+        descripcionCorta:
+          type: string
+          description: "descripción: descripcion corta<br> formato: cadena"
+          example: 'Home'
+        descripcionLarga:
+          type: string
+          description: "descripción: descripcion larga<br> formato: cadena"
+          example: 'Home'
+        valor1:
+          type: string
+          description: "descripción: valor 1 <br> formato: número en cadena"
+          example: '1'
+        valor2:
+          type: string
+          description: "descripción: valor 2 <br> formato: número en cadena"
+          example: '1'
+        orden:
+          type: number
+          description: "descripción: orden <br> formato: numérico"
+          example: '1'
+        estado:
+          type: string
+          description: "descripción: estado <br> formato: número en cadena"
+    PerfilDataResponse:
+      type: object
+      description: "Respuesta del perfil"
+      properties:
+        data:
+          $ref: '#/components/schemas/PerfilData'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    ValidarLoginRequest:
+      type: object
+      description: "request para el registro del login"
+      properties:
+        documento:
+          type: string
+          description: "descripción: usuario <br> formato: cadena"
+          example: 'ELMR.CGS'
+        usuario:
+          type: string
+          description: "descripción: contraseña <br> formato: cadena"
+          example: '*****'
+        token:
+          type: string
+          description: "descripción: contraseña <br> formato: cadena"
+          example: '*****'
+    ValidarLoginResponse:
+      type: object
+      description: "Respuesta del login"
+      properties:
+        data:
+          $ref: '#/components/schemas/ObtenerValidarLoginDataResponse'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    ObtenerValidarLoginDataResponse:
+      type: object
+      description: "Obtener los datos del paciente"
+      properties:
+        token:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        refreshToken:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        exp:
+          type: integer
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        iat:
+          type: integer
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        jti:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+    ListarDatosUsuarioMobileResponse:
+      type: object
+      description: "Obtener datos del usuario"
+      properties:
+        data:
+          $ref: '#/components/schemas/ListarDatosUsuarioMobileDataResponse'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    ListarDatosUsuarioMobileDataResponse:
+      type: object
+      description: "Obtener los datos del paciente"
+      properties:
+        codRegis:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        numCel:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        perfilUsu:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        paciente:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        estadoRg:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        codPerso:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        dni:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        tipoDoc:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        fechaNac:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        edad:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        tipoSexo:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        sexo:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        nombPerfil:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        servicio:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        codAmbie:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        unidad:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        exp:
+          type: integer
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        iat:
+          type: integer
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+        jti:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+    RefreshTokenMobileRequest:
+      type: object
+      description: "request para el refrescar token"
+      properties:
+        token:
+          type: string
+          description: "descripción: token para refrescar sesión <br> formato: número en cadena"
+          example: '123aBc...'
+    RefreshTokenMobileResponse:
+      type: object
+      description: "Respuesta del refrescar token de sesión"
+      properties:
+        data:
+          $ref: '#/components/schemas/RefreshTokenMobileDataResponse'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    RefreshTokenMobileDataResponse:
+      type: object
+      description: "Datos de respuesta del registro del login"
+      properties:
+        token:
+          type: string
+          description: "descripción: token de usuario <br> formato: número en cadena"
+          example: '123aBc...'
+        refreshToken:
+          type: string
+          description: "descripción: token de refresco del token de usuario <br> formato: número en cadena"
+          example: '123aBc...'
+        jti:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+    ValidarPermisoUsuarioResponse:
+      type: object
+      description: "Obtener respuesta del permiso usuario"
+      properties:
+        data:
+          $ref: '#/components/schemas/ValidarPermisoUsuarioDataResponse'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    ValidarPermisoUsuarioDataResponse:
+      type: object
+      description: "Obtener los validacion del permiso usuario"
+      properties:
+        permisoUsuario:
+          type: boolean
+          description: "descripción: validacion del perfil <br> formato: Alfanumerico"
+          example: true
+    VerificacionMfaRequest:
+      type: object
+      description: "request para el registro del login"
+      properties:
+        correo:
+          type: string
+          description: "descripción: usuario <br> formato: cadena"
+          example: 'ELMR.CGS'
+        codigo:
+          type: integer
+          description: "descripción: usuario <br> formato: cadena"
+          example: 'ELMR.CGS'
+    VerificacionMfaResponse:
+      type: object
+      description: "Respuesta del login"
+      properties:
+        data:
+          $ref: '#/components/schemas/VerificacionMfaDataResponse'
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    VerificacionMfaDataResponse:
+      type: object
+      description: "Datos de la respuesta del login"
+      properties:
+        token:
+          type: string
+          description: "descripción: token de usuario <br> formato: número en cadena"
+          example: '123aBc'
+        refreshToken:
+          type: string
+          description: "descripción: token de usuario <br> formato: cadena"
+          example: '123aBc...'
+        exp:
+          type: integer
+          description: "descripción: fecha de expiración del token <br> formato: dd-MM-yyyy"
+          example: '03-06-2024'
+        iat:
+          type: integer
+          description: "descripción: fecha de la generación del token <br> formato: dd-MM-yyyy"
+          example: '03-06-2024'
+        jti:
+          type: string
+          description: "descripción: identificador del token <br> formato: cadena"
+          example: "35a96cde-2b6a-402c-8eaa-5a4e6a92c9bc"
+    Metadata:
+      type: object
+      description: "Indica que la solicitud ha tenido éxito"
+      properties:
+        status:
+          type: integer
+          description: "descripción: códigos de estado de respuesta HTTP  <br> formato: numerico"
+          format: int32
+          example: '200'
+        message:
+          type: string
+          description: "descripción: mensaje si el proceso fue exitoso  <br> formato: cadena"
+          example: 'La operación fue exitosa.'
+    ApiResponse400:
+      type: object
+      description: "Respuesta que el servidor no pudo interpretar la solicitud dada una sintaxis inválida"
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ApiDataResponse400'
+    ApiDataResponse400:
+      type: object
+      description: "Respuesta que el servidor no pudo interpretar la solicitud dada una sintaxis inválida"
+      properties:
+        status:
+          type: integer
+          description: "descripción: códigos de estado de respuesta HTTP  <br> formato: numerico"
+          format: int32
+          example: '400'
+        message:
+          type: string
+          description: "descripción: mensaje de respuesta HTTP  <br> formato: cadena"
+          example: 'Los datos ingresados son inválidos.'
+    ApiResponse401:
+      type: object
+      description: "Respuesta que el servidor no pudo procesar la solicitud debido a un acceso no autorizado. Esto puede deberse a credenciales inválidas o a la falta de autenticación"
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ApiDataResponse401'
+    ApiDataResponse401:
+      type: object
+      description: "Respuesta que el servidor no pudo procesar la solicitud debido a un acceso no autorizado. Esto puede deberse a credenciales inválidas o a la falta de autenticación"
+      properties:
+        status:
+          type: integer
+          description: "descripción: códigos de estado de respuesta HTTP  <br> formato: numerico"
+          format: int32
+          example: '401'
+        message:
+          type: string
+          description: "descripción: mensaje de respuesta HTTP  <br> formato: cadena"
+          example: 'Acceso no autorizado.'
+    ApiResponse404:
+      type: object
+      description: "La petición se ha completado con éxito pero su respuesta no tiene ningún contenido"
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ApiDataResponse404'
+    ApiDataResponse404:
+      type: object
+      description: "La petición se ha completado con éxito pero su respuesta no tiene ningún contenido"
+      properties:
+        status:
+          type: integer
+          description: "descripción: códigos de estado de respuesta HTTP  <br> formato: numerico"
+          format: int32
+          example: '404'
+        message:
+          type: string
+          description: "descripción: mensaje de respuesta HTTP  <br> formato: cadena"
+          example: 'No se encontró contenido.'
+    ApiResponse500:
+      type: object
+      description: "El servidor ha encontrado una situación que no sabe cómo manejarla"
+      properties:
+        metadata:
+          $ref: '#/components/schemas/ApiDataResponse500'
+    ApiDataResponse500:
+      type: object
+      description: "El servidor ha encontrado una situación que no sabe cómo manejarla"
+      properties:
+        status:
+          type: integer
+          description: "descripción: códigos de estado de respuesta HTTP  <br> formato: numerico"
+          format: int32
+          example: '500'
+        message:
+          type: string
+          description: "descripción: mensaje de respuesta HTTP  <br> formato: cadena"
+          example: >-
+            Ocurrió un error no esperado, por favor comuníquese con el área de
+            soporte.
